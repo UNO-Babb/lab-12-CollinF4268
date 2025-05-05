@@ -5,53 +5,42 @@
 
 import time
 import random
-import os
-# Your current working directory needs to see the AllSorts.py
-# If you have issues you should comment out this line.
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+import AllSorts  # Make sure AllSorts.py is in the same directory
 
-import AllSorts
+def time_sort(sort_function, data):
+    """Returns the time taken to sort a copy of the input data using the given sort_function."""
+    arr = data.copy()
+    start = time.time()
+    sort_function(arr)
+    end = time.time()
+    return round(end - start, 5)
 
 def main():
-  random.seed(2020) # This makes sure that the random list will be the same every time.
+    random.seed(2020)  # Ensures reproducibility
 
+    numberTerms = 10000  # You can lower this to 1000 if sorting is too slow on your machine
 
-  numberTerms = 10000
+    # Generate test lists
+    orderedList = list(range(numberTerms))
+    reversedList = list(reversed(range(numberTerms)))
+    randomList = [random.randint(1, 10000) for _ in range(numberTerms)]
 
-  orderedList = []
-  reversedList = []
-  randomList = []
+    print("Sorting {} elements using different algorithms...".format(numberTerms))
 
-  for i in range(numberTerms):
-    orderedList.append(i)
-    reversedList.insert(0, i)
-    randomList.append(random.randint(1, 10000))
+    # Store results for easy copy-paste into Report.txt
+    def run_sort_group(name, func):
+        print("\n" + name)
+        print("Sorted: {:.5f} seconds".format(time_sort(func, orderedList)))
+        print("Reversed: {:.5f} seconds".format(time_sort(func, reversedList)))
+        print("Random: {:.5f} seconds".format(time_sort(func, randomList)))
 
-  # Run each of the sorts in different python sessions.
-  # The sorts are bubbleSort, bubbleSortEarlyExit, selectionSort, insertionSort, and mergeSort
+    run_sort_group("Bubble Sort", AllSorts.bubbleSort)
+    run_sort_group("Bubble Sort Early Exit", AllSorts.bubbleSortEarlyExit)
+    run_sort_group("Selection Sort", AllSorts.selectionSort)
+    run_sort_group("Insertion Sort", AllSorts.insertionSort)
+    run_sort_group("Merge Sort", AllSorts.mergeSort)
 
-  print("Begin Sorting %d elements." % numberTerms)
-
-  startTime = time.time()
-  AllSorts.bubbleSort(orderedList)
-  endTime = time.time()
-  elapsedTime = endTime - startTime
-  print("Ordered list time: %.5f seconds" % elapsedTime)
-
-  startTime = time.time()
-  AllSorts.bubbleSort(reversedList)
-  endTime = time.time()
-  elapsedTime = endTime - startTime
-  print("Reversed list time: %.5f seconds" % elapsedTime)
-
-  startTime = time.time()
-  AllSorts.bubbleSort(randomList)
-  endTime = time.time()
-  elapsedTime = endTime - startTime
-  print("Random list time: %.5f seconds" % elapsedTime)
-
-  print("Sorting Complete")
-
+    print("\nAll sorting complete. Copy the above times into Report.txt.")
 
 if __name__ == '__main__':
-  main()
+    main()

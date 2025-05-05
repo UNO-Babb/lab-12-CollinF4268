@@ -1,44 +1,45 @@
-Name:
+Name: Collin Frederick
 
-Number of elements:
+Number of elements: 10000
 
 Bubble Sort
-Sorted:
-Reversed:
-Random:
+Sorted: 2.93334
+Reversed: 6.07000
+Random: 4.59832
 
 Bubble Sort Early Exit
-Sorted:
-Reversed:
-Random:
+Sorted: 0.00056
+Reversed: 6.22013
+Random: 4.74885
 
 Selection Sort
-Sorted:
-Reversed:
-Random:
+Sorted: 2.02513
+Reversed: 1.97354
+Random: 1.99600
 
 Insertion Sort
-Sorted:
-Reversed:
-Random:
+Sorted: 0.00097
+Reversed: 3.74764
+Random: 2.13564
 
 Merge Sort
-Sorted:
-Reversed:
-Random:
+Sorted: 0.01599
+Reversed: 0.01611
+Random: 0.02100
 
 Questions to answer:
 1) What was the worst case scenario for any sorting technique?
-
+The worst-case scenario was Bubble Sort Early Exit on the reversed list, it took over 6 seconds because it had to perform the maximum number of comparisons and swaps.
 
 2) The first 3 sorts have the same runtime of O(n^2). Why were the times different? Why would one be more efficient than the others?
-
+Although they all have O(n^2) time complexity, the actual operations differ. Selection sort doesn’t make unnecessary swaps, and insertion sort can finish early when the list is mostly sorted. These differences make some sorts faster in practice.
 
 3) Why was merge sort so much more efficient?
-
+Merge sort has a time complexity of O(n log n), which is significantly better for large lists. It efficiently divides and conquers the data and does not depend on the list being in any particular order.
 
 4) The built-in sorting technique for most programming languages is known as TimSort.
 This is a merge sort until the arrays have fewer than 10 elements, then it does an insertion sort. Why would this be useful?
-
+Because insertion sort is extremely fast on small datasets, combining it with merge sort reduces overhead and improves real-world performance. This hybrid method gives the best of both algorithms.
 
 5) What issues can you see with a recursive sorting technique like merge sort?
+Recursive techniques use additional memory and stack space, which can be a problem with very large datasets or systems with limited memory. It may also cause a stack overflow if the recursion depth is too high.
